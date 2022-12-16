@@ -1,11 +1,12 @@
 import React from 'react';
-
-
+import Lista from './components/lista';
+import Formulario from './components/formulario';
 
 function App() {
   return (
     <div className="App">
-      OI MUNDO!
+      <Formulario></Formulario>
+      <Lista></Lista>
     </div>
   );
 }
