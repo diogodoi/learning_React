@@ -1,8 +1,9 @@
 import React from "react";
-
+import  style from './Botao.module.scss';
 
 class Button extends React.Component {
     render(){
+        /** Utilizando o inline style 
         const color = 'red';
         
         const isActivate = true;
@@ -11,6 +12,12 @@ class Button extends React.Component {
         }
         return (
             <button style = {styles}>
+                Botão
+            </button>
+        )
+        */
+        return (
+            <button className= {style.botao}>
                 Botão
             </button>
         )
