@@ -1,9 +1,12 @@
 import React from "react";
 import  style from './Botao.module.scss';
 
-class Button extends React.Component<{type?:"button" | "submit" | "reset" | undefined,texto:string}> {
+class Button extends React.Component<{
+    type?:"button" | "submit" | "reset" | undefined,
+    texto:string,
+    onClick?:()=>void}> {
     render(){
-        const {type = "button"} = this.props
+        const {type = "button",onClick} = this.props
         /** Utilizando o inline style 
         const color = 'red';
         
@@ -18,7 +21,7 @@ class Button extends React.Component<{type?:"button" | "submit" | "reset" | unde
         )
         */
         return (
-            <button type={type} className= {style.botao}>
+            <button onClick={onClick} type={type} className= {style.botao}>
                 {this.props.texto}
             </button>
         )
