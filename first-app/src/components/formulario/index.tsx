@@ -29,7 +29,9 @@ class Formulario extends React.Component {
                         min = "00:00:00"
                         max = "01:30:00" />                
                 </div>
-                <Button></Button>
+                <Button 
+                    texto = "Adicionar"
+                />
             </form>
         )
     }
