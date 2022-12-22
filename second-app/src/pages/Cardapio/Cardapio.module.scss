@@ -1,5 +1,5 @@
-@import "styles/_variaveis.scss";
-@import "styles/_breakingpoints.scss";
+@import "styles/variaveis";
+@import "styles/breakingpoints";
 
 .menu {
     padding: 20px $padding-horizontal;
@@ -65,5 +65,14 @@
         color: $dark;
         font-size: 3rem;
         margin-bottom: 30px;
+    }
+
+    &__filtros {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 30px;
+        width: 100%;
     }
 }
