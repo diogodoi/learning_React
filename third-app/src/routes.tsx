@@ -11,20 +11,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default function AppRouter() {
   return (
-    <main className ='container'>
+    <main className='container'>
       <Router>
         <Menu />
-
         <Routes>
           {/* nested routes */}
           <Route path='/' element={<Header />}>
             <Route index element={<Inicio />} />
             <Route path='cardapio' element={<Cardapio />} />
             <Route path='sobre' element={<Sobre />} />
-            <Route path='prato/:id' element ={<Prato/>}/>
           </Route>
+          <Route path='prato/:id' element={<Prato />} />
           <Route path='*' element={<NotFound />} />
-          
         </Routes>
         <Footer />
       </Router>

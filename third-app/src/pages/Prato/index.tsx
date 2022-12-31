@@ -1,19 +1,21 @@
-import classNames from 'classnames';
+
 import styles from './Prato.module.scss';
 import { useParams, useNavigate } from 'react-router-dom';
 import cardapio from 'data/cardapio.json';
 import TagsPrato from 'components/TagsPrato';
+import NotFound from 'pages/NotFound';
+import Header from 'components/Header';
 
 export default function Prato() {
   const { id } = useParams();
   const prato = cardapio.find(item => item.id === Number(id));
   if (!prato) {
-    return '';
+    return <NotFound/>;
   }
   const navigate = useNavigate();
   return (
 
-    <>
+    <Header>
       <button className={styles.voltar}
         onClick={() => navigate(-1)}>
         {'< Voltar'}
@@ -32,6 +34,6 @@ export default function Prato() {
           <TagsPrato {...prato}/>
         </div>
       </section>
-    </>
+    </Header>
   );
 }
