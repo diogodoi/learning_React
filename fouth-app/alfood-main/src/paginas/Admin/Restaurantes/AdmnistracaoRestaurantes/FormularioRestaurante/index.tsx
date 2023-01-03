@@ -1,8 +1,10 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Typography, Box } from '@mui/material';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+
 import { useParams } from 'react-router-dom';
 import IRestaurante from '../../../../../interfaces/IRestaurante';
+import http from '../../../../../HTTP';
+
 
 const FormularioRestaurante = () => {
 
@@ -10,7 +12,7 @@ const FormularioRestaurante = () => {
 
   useEffect(() => {
     if (param.id) {
-      axios.get<IRestaurante>(`http://0.0.0.0:8000/api/v2/restaurantes/${param.id}/`)
+      http.get<IRestaurante>(`restaurantes/${param.id}/`)
         .then(resposta => setNomeRest(resposta.data.nome))
     }
   }, [param])
@@ -19,8 +21,8 @@ const FormularioRestaurante = () => {
   const aoSubmeterForm = (evento: React.FormEvent<HTMLFormElement>) => {
     evento.preventDefault()
 
-    if(param.id) {
-      axios.put(`http://0.0.0.0:8000/api/v2/restaurantes/${param.id}/`, {
+    if (param.id) {
+      http.put(`restaurantes/${param.id}/`, {
         nome: nomeRest,
       })
         .then(() => {
@@ -28,7 +30,7 @@ const FormularioRestaurante = () => {
         })
 
     } else {
-      axios.post('http://0.0.0.0:8000/api/v2/restaurantes/', {
+      http.post('restaurantes/', {
         nome: nomeRest,
       })
         .then(() => {
@@ -40,15 +42,29 @@ const FormularioRestaurante = () => {
   }
 
   return (
-    <form onSubmit={aoSubmeterForm}>
-      <TextField
-        value={nomeRest}
-        onChange={evento => setNomeRest(evento.target.value)}
-        id='standar-basic'
-        label="Nome do Restaurante"
-        variant="standard" />
-      <Button type='submit' variant='outlined'>Outline</Button>
-    </form>
+
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <Typography component="h1" variant="h6">Formulário de Restaurantes</Typography>
+      <Box component="form" onSubmit={aoSubmeterForm}>
+        <TextField
+          fullWidth
+          value={nomeRest}
+          onChange={evento => setNomeRest(evento.target.value)}
+          id='standar-basic'
+          label="Nome do Restaurante"
+          variant="standard"
+          required
+        />
+        <Button
+          sx={{ marginTop: 1 }}
+          fullWidth
+          type='submit'
+          variant='outlined'
+        >
+          Salvar
+        </Button>
+      </Box>
+    </Box>
   );
 }
 

@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import IRestaurante from '../../../../interfaces/IRestaurante';
-import { Paper, Button,Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-import axios from 'axios';
+import { Paper, Button, Table, TableContainer, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
+
 import { Link } from 'react-router-dom';
+import http from '../../../../HTTP';
 const AdmnistracaoRestaurantes = () => {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([])
   useEffect(() => {
-    axios.get<IRestaurante[]>(`http://0.0.0.0:8000/api/v2/restaurantes/`)
+    http.get<IRestaurante[]>(`restaurantes/`)
       .then(resposta => setRestaurantes(resposta.data))
 
   }, [])
 
-  const excluirRest = (restExcluido:IRestaurante) =>{
-    axios.delete(`http://0.0.0.0:8000/api/v2/restaurantes/${restExcluido.id}/`)
-    .then(()=>{
-      const listaRest = restaurantes.filter(rest => rest.id !== restExcluido.id)
-      setRestaurantes([...listaRest])
-    })
+  const excluirRest = (restExcluido: IRestaurante) => {
+    http.delete(`restaurantes/${restExcluido.id}/`)
+      .then(() => {
+        const listaRest = restaurantes.filter(rest => rest.id !== restExcluido.id)
+        setRestaurantes([...listaRest])
+      })
   }
   return (
     // Retornar a lista de restaurante
@@ -48,9 +49,9 @@ const AdmnistracaoRestaurantes = () => {
               </TableCell>
               <TableCell >
                 <Button
-                variant='outlined'
-                color="error"
-                onClick={()=> excluirRest(restaurant)}
+                  variant='outlined'
+                  color="error"
+                  onClick={() => excluirRest(restaurant)}
                 >Excluir</Button>
               </TableCell>
             </TableRow>
